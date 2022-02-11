@@ -1,0 +1,16 @@
+<div class="col-5 mt-5">
+    <form #f="ngForm" (ngSubmit)="sendLogin(f)">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" class="form-control" name="username" placeholder="Inserisci l'username" required [(ngModel)]="modelusername">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Inserisci la password" required [(ngModel)]="modelpassword">
+        </div>
+        <div *ngIf="errmsg" class="alert alert-danger">
+            <p>{{errmsg}}</p>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Accedi</button>
+      </form>
+</div>
