@@ -10,7 +10,7 @@ import { StorageDataService } from '../services/storage-data.service';
 })
 export class GiochiComponent implements OnInit {
 
-  user: Users | any; 
+  user: Users | any;
   userList: Users[] | any = [];
   userMatches: Matches[] ;
   private storage = new StorageDataService();
@@ -24,7 +24,8 @@ export class GiochiComponent implements OnInit {
     let storage = new StorageDataService();
     this.user = storage.session.get<Users>("CurrentUser");
     this.userList = storage.local.get<Users[]>("Users");
-    this.userMatches = storage.local.get<Matches[]>("Matches")?.filter((element) => element.status !== this.matchStatus.end)  as Matches[] ??[]; 
+    this.userMatches =
+    (storage.local.get<Matches[]>("Matches")?.filter((element) => element.status !== this.matchStatus.end) as Matches[] ?? []).map(match => Matches.build(match));
   }
 
   createMatch() {
