@@ -1,0 +1,35 @@
+<p>Utente corrente: {{user.name}} {{user.surname}}</p>
+
+<button type="button" (click)="createMatch()" class="btn btn-secondary">Crea partita</button>
+
+<br><br>
+Lista giocatori:
+<ul>
+  <li *ngFor="let user of userList">
+    {{user.name}} {{user.surname}}
+  </li>
+</ul>
+<br>
+Lista partite:
+<hr>
+<ng-container *ngIf="userMatches">
+  <div class="flex p-0" *ngFor="let match of userMatches">
+    <p><b>Data: </b>{{match.date | date}}<br><b>Creatore: </b>{{match.maker.name}} {{match.maker.surname}}<br><b>Stato:
+      </b>{{match.status | matchStatus}}<br>
+      <span *ngIf="match.status == matchStatus.onGoing"><b>Giocatori:
+        </b>{{match.maker.name}} {{match.maker.surname}} VS {{match.player.name}} {{match.player.surname}}</span><br>
+
+    </p>
+    <ul *ngFor="let move of moveList">
+      <li>{{move.maker.name}} {{move.maker.surname}} - {{move.date | date}}</li>
+    </ul>
+    <button type="button" (click)="joinMatch(match)"
+      *ngIf="(match.status == matchStatus.onHold && match.maker.name !== user.name && match.maker.surname !== user.surname)"
+      class="btn btn-secondary">Partecipa</button>
+    <button type="button" (click)="seeMatch(match)" *ngIf="(match.status == matchStatus.onGoing)"
+      class="btn btn-secondary mr-3">Visualizza</button>
+    <button type="button" (click)="seeMoveList(match)" *ngIf="(match.status == matchStatus.onGoing)"
+      class="btn btn-secondary">Lista mosse</button>
+    <hr>
+  </div>
+</ng-container>
