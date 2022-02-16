@@ -1,4 +1,4 @@
-<p>Utente corrente: {{user.name}} {{user.surname}}</p>
+<p>Utente corrente: {{currentUser.name}} {{currentUser.surname}}</p>
 
 <button type="button" (click)="createMatch()" class="btn btn-secondary">Crea partita</button>
 
@@ -24,7 +24,7 @@ Lista partite:
       <li>{{move.maker.name}} {{move.maker.surname}} - {{move.date | date}}</li>
     </ul>
     <button type="button" (click)="joinMatch(match)"
-      *ngIf="(match.status == matchStatus.onHold && match.maker.name !== user.name && match.maker.surname !== user.surname)"
+      *ngIf="(match.status == matchStatus.onHold && match.maker.name !== currentUser.name && match.maker.surname !== currentUser.surname)"
       class="btn btn-secondary">Partecipa</button>
     <button type="button" (click)="seeMatch(match)" *ngIf="(match.status == matchStatus.onGoing)"
       class="btn btn-secondary mr-3">Visualizza</button>

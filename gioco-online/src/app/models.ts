@@ -1,10 +1,22 @@
 
 export class Users {
-
-    constructor(readonly name: string,readonly surname: string) {
-
+    public date: Date;
+    userMatches: number;
+    constructor(public id: number, readonly name: string,readonly surname: string) {
+        this.date = new Date();
     }
-
+    get fullName():string {
+        return this.name + ' ' + this.surname;
+    }
+    addUserMatch(user: Users) {
+        this.userMatches = this.userMatches + 1;
+    }
+    static build(users: Users) {
+        let user = new Users(users.id, users.name, users.surname);
+        user.date = users.date;
+        user.userMatches = users.userMatches;
+        return user;
+    }
 }
 
 export class Matches {
@@ -32,12 +44,16 @@ export class Matches {
 
     addMove(move: Move) {
         this.moves.push(move);
-        this.currentPlayer = this.currentPlayer == this.maker ? this._player: this.maker
+        this.currentPlayer = this.currentPlayer.name == this.maker.name && this.currentPlayer.surname == this.maker.surname ? this._player : this.maker //TO ASK: Perchè se confronto gli oggetti non funziona?
+        console.log('currentPlayer:' + this.currentPlayer.name + this.currentPlayer.surname);
+        console.log('maker:' + this.maker.name + this.maker.surname);
+        console.log('_player:' + this._player.name + this._player.surname);
     }
 
     static build( matches: Matches){
         let match = new  Matches(matches.id, matches.maker, matches.date, matches.status);
         if(matches._player) match.player = matches._player;
+        match.currentPlayer = matches.currentPlayer;
         match.moves = matches.moves;
         return match;
     }

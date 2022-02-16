@@ -12,7 +12,7 @@ import { StorageDataService } from '../services/storage-data.service';
 
 export class PartiteComponent implements OnInit {
   private storage = new StorageDataService();
-  user: Users | any; 
+  currentUser: Users | any; 
   userMatches: Matches[] ;
 
   constructor() { }
@@ -23,13 +23,14 @@ export class PartiteComponent implements OnInit {
   }
 
   moveNumber(rowData: Matches){
-    
+    return rowData.moves.length;
   }
+
 
   ngOnInit(): void {
     let storage = new StorageDataService();
-    this.user = storage.session.get<Users>("CurrentUser");
-    this.userMatches = storage.local.get<Matches[]>("Matches") as Matches[]; 
+    this.currentUser = storage.session.get<Users>("CurrentUser");
+    this.userMatches = this.storage.getMatches();
   }
 
 }

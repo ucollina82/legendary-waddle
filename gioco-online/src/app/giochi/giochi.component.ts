@@ -10,7 +10,7 @@ import { StorageDataService } from '../services/storage-data.service';
 })
 export class GiochiComponent implements OnInit {
 
-  user: Users | any;
+  currentUser: Users | any;
   userList: Users[] | any = [];
   userMatches: Matches[] ;
   private storage = new StorageDataService();
@@ -22,7 +22,7 @@ export class GiochiComponent implements OnInit {
 
   ngOnInit(): void {
     let storage = new StorageDataService();
-    this.user = storage.session.get<Users>("CurrentUser");
+    this.currentUser = storage.session.get<Users>("CurrentUser");
     this.userList = storage.local.get<Users[]>("Users");
     this.userMatches =
     (storage.local.get<Matches[]>("Matches")?.filter((element) => element.status !== this.matchStatus.end) as Matches[] ?? []).map(match => Matches.build(match));
@@ -30,13 +30,17 @@ export class GiochiComponent implements OnInit {
 
   createMatch() {
     let matchId = Math.max(0,Math.max(...this.userMatches.map(match => match.id))) //recupera l'ultimo id
-    this.userMatches.push(new Matches(matchId + 1,this.user,new Date(),MatchStatusType.onHold)); //aggiungi la nuova partita alla lista
+    this.userMatches.push(new Matches(matchId + 1,this.currentUser,new Date(),MatchStatusType.onHold)); //aggiungi la nuova partita alla lista
+    //this.currentUser.addUserMatch(this.currentUser);
+
     this.storage.local.set<Matches[]>("Matches",this.userMatches); // salva lista
+    
   }
 
   joinMatch(match: Matches) {
     match.status = MatchStatusType.onGoing;
-    match.player = this.user;
+    match.player = this.currentUser;
+   // this.currentUser.addUserMatch();
     this.storage.local.set<Matches[]>("Matches",this.userMatches);
     this.router.navigate(['/partita', match.id]);
   }

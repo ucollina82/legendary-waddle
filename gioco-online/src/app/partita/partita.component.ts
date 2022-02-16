@@ -10,39 +10,42 @@ import { StorageDataService } from '../services/storage-data.service';
 })
 export class PartitaComponent implements OnInit {
 
-  user: Users | any; 
+  currentUser: Users | any; 
   private storage = new StorageDataService();
   userMatches: Matches[];
   matchId: number;
   match: Matches;
   bottom = document.getElementById('effettuaMossa')
-  enableMove: boolean;
+  enableMove = false;
 
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     let storage = new StorageDataService();
-    this.user = storage.session.get<Users>("CurrentUser");
-    this.matchId = +this.router.snapshot.params['id']; //DA CHIEDERE: Perchè invece di Router si mette ActivatedRoute? Che differenza c'è tra di loro?
-    this.userMatches = this.storage.local.get<Matches[]>("Matches") as Matches[];
-    this.match = this.userMatches.find((element) => element.id == this.matchId) as Matches;
+    this.currentUser = storage.session.get<Users>("CurrentUser");
+    this.matchId = +this.router.snapshot.params['id']; //TO ASK: Perchè invece di Router si mette ActivatedRoute? Che differenza c'è tra di loro?
+    this.userMatches = this.storage.getMatches();
+    this.match = this.getMatch();
+   
   }
 
   move() {
-    //Aggiungi mossa in MoveLists();
-    let move = new Move(this.user);
+    let move = new Move(this.currentUser); 
     this.match.addMove(move);
-    this.storage.local.set<Matches[]>("Matches",this.userMatches);
+    this.storage.local.set<Matches[]>("Matches",this.userMatches); 
+    this.update();
   }
 
   update(){
-    this.userMatches = this.storage.local.get<Matches[]>("Matches") as Matches[];
-    this.match = this.userMatches.find((element) => element.id == this.matchId) as Matches;
-    if (this.match.currentPlayer == this.user) {
-      this.enableMove = true;
-    }
+    this.match = this.getMatch();
+    this.enableMove = this.match.currentPlayer.name == this.currentUser.name && this.match.currentPlayer.surname == this.currentUser.surname ? true : false
   }
 
+  getMatch() {
+    this.userMatches = this.storage.getMatches();
+    return this.userMatches.find((element) => element.id == this.matchId) as Matches;
+  }
+  
 
   
 

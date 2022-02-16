@@ -13,6 +13,7 @@ import { PartitaComponent } from './partita/partita.component';
 import { MatchStatusPipe } from './pipes/match-status.pipe';
 import { PartiteComponent } from './partite/partite.component';
 import { DxDataGridModule } from 'devextreme-angular';
+import { GiocatoriComponent } from './giocatori/giocatori.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DxDataGridModule } from 'devextreme-angular';
     GiochiComponent,
     PartitaComponent,
     MatchStatusPipe,
-    PartiteComponent
+    PartiteComponent,
+    GiocatoriComponent
   ],
   imports: [
     BrowserModule,
