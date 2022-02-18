@@ -9,7 +9,7 @@ import { StorageDataService } from '../services/storage-data.service';
 })
 export class GiocatoriComponent implements OnInit {
   private storage = new StorageDataService();
-  userList: Users[] | any = [];
+  userList: Users[] ;
   userMatches: Matches[] ;
   
 
@@ -18,8 +18,6 @@ export class GiocatoriComponent implements OnInit {
   ngOnInit(): void {
     this.userList = this.storage.getUsers();
     this.userMatches = this.storage.getMatches();
-    
-    
   }
 
   userPoints() {

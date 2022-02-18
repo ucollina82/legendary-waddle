@@ -21,6 +21,7 @@ export class StorageDataService {
 
   getUsers() {
     return (this.local.get<Users[]>("Users") as Users[] ?? []).map(user => Users.build(user));
+    
   }
 
  
