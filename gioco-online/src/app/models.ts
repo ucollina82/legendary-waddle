@@ -34,6 +34,7 @@ export class Matches {
     currentPlayer: Users;
     moves: Move[] = [];
     winner: Users;
+    playground: Playground;
 
     constructor(public id: number,public maker: Users, public date: Date, public status: MatchStatusType) {
         this.makerDescription = `${this.maker.name} ${this.maker.surname}`;
@@ -66,6 +67,7 @@ export class Matches {
             this.winner.name == this.maker.name && this.winner.surname == this.maker.surname ? this._player.points = this._player.points + 1 : this.maker.points = this.maker.points + 1;
             this.status = MatchStatusType.end;
         }
+        //inserire qui l'aggiunta del playground
     }
     
     static build( matches: Matches){
@@ -82,6 +84,18 @@ export class Move {
     public date: Date;
     constructor(public maker: Users) {
         this.date = new Date();
+    }
+
+    get makerName():string {
+        return 'pippo';
+    }
+
+
+}
+
+export class Playground {
+    constructor(public className: string) {
+       
     }
 
 }

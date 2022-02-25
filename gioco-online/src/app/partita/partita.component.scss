@@ -1,0 +1,22 @@
+.playground{
+    background-color: #e7e7e7;
+    border-radius: 7px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 350px;
+}
+
+.playground div{
+    background-color: #ffffff;
+    border-radius: 7px;
+    height: 100px;
+    display: inline-block;
+    flex: 1 0 30%;
+    margin: 5px;
+}
+
+.playground div.selected{
+    background-color: #bbb;
+}

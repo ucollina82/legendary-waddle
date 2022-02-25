@@ -15,6 +15,7 @@ export class GiochiComponent implements OnInit {
   userMatches: Matches[] ;
   private storage = new StorageDataService();
   moveList: Move[];
+  moveOn = false;
 
   matchStatus = MatchStatusType;
 

@@ -1,16 +1,16 @@
-<p>Utente corrente: {{currentUser.name}} {{currentUser.surname}}</p>
-
-<button type="button" (click)="createMatch()" class="btn btn-secondary">Crea partita</button>
-
+<button type="button" (click)="createMatch()" class="btn btn-secondary btn-success">Crea partita</button>
 <br><br>
-Lista giocatori:
+<b >Utente corrente:</b><br>
+<div style="color:green;">{{currentUser.name}} {{currentUser.surname}}</div> <br><br>
+
+<b>Lista giocatori:</b>
 <ul>
   <li *ngFor="let user of userList">
     {{user.name}} {{user.surname}}
   </li>
 </ul>
 <br>
-Lista partite:
+<b>Lista partite:</b>
 <hr>
 <ng-container *ngIf="userMatches">
   <div class="flex p-0" *ngFor="let match of userMatches">
@@ -20,9 +20,12 @@ Lista partite:
         </b>{{match.maker.name}} {{match.maker.surname}} VS {{match.player.name}} {{match.player.surname}}</span><br>
 
     </p>
-    <ul *ngFor="let move of moveList">
-      <li>{{move.maker.name}} {{move.maker.surname}} - {{move.date | date:'dd/MM/yyyy hh:mm:ss'}}</li>
-    </ul>
+    <div *ngIf="moveOn">
+      <b>Lista mosse:</b>
+      <ul *ngFor="let move of match.moves">
+        <li>{{move.maker.name}} {{move.maker.surname}} - {{move.date | date:'dd/MM/yyyy hh:mm:ss'}}</li>
+      </ul>
+    </div>
     <button type="button" (click)="joinMatch(match)"
       *ngIf="(match.status == matchStatus.onHold && match.maker.name !== currentUser.name && match.maker.surname !== currentUser.surname)"
       class="btn btn-secondary">Partecipa</button>
