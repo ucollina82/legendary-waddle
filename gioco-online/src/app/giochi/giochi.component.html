@@ -20,7 +20,7 @@
         </b>{{match.maker.name}} {{match.maker.surname}} VS {{match.player.name}} {{match.player.surname}}</span><br>
 
     </p>
-    <div *ngIf="moveOn">
+    <div *ngIf="match.id == selectedMatchID">
       <b>Lista mosse:</b>
       <ul *ngFor="let move of match.moves">
         <li>{{move.maker.name}} {{move.maker.surname}} - {{move.date | date:'dd/MM/yyyy hh:mm:ss'}}</li>

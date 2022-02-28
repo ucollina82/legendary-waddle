@@ -16,6 +16,7 @@ export class GiochiComponent implements OnInit {
   private storage = new StorageDataService();
   moveList: Move[];
   moveOn = false;
+  selectedMatchID: number;
 
   matchStatus = MatchStatusType;
 
@@ -54,6 +55,7 @@ export class GiochiComponent implements OnInit {
 
   seeMoveList(match: Matches ) {
     this.moveList = match.moves;
+    this.selectedMatchID = match.id;
   }
 
 
