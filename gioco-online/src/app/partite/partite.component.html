@@ -1,11 +1,20 @@
 <dx-data-grid *ngIf="userMatches" [dataSource]="userMatches" keyExpr="id" [columnAutoWidth]="true" >
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-filter-panel [visible]="true"></dxo-filter-panel>
-    <dxi-column caption="Data inizio"  dataField="date" dataType="date"></dxi-column>
+    <dxi-column caption="Data inizio"  [calculateCellValue]="matchDate" dataType="date"></dxi-column>
     <dxi-column caption="Giocatore 1" dataField="makerDescription"></dxi-column>
     <dxi-column caption="Giocatore 2" dataField="playerDescription"></dxi-column>
     <dxi-column caption="Stato" [calculateCellValue]="statusCell"></dxi-column>
-    <dxi-column caption="Vincitore" dataField="winner"></dxi-column>
+    <dxi-column caption="Vincitore" dataField="winnerDescription"></dxi-column>
     <dxi-column caption="Mosse" [calculateCellValue]="moveNumber"></dxi-column>
+    <dxi-column type="buttons">
+        <dxi-button [onClick]="goToMatch" text="Visualizza"></dxi-button>
+    </dxi-column> 
+    <!-- <dxi-column caption="Azioni">
+        <a [routerLink]="['/partita']" >
+            Visualizza
+        </a>
+    </dxi-column> -->
+   
 </dx-data-grid>
 

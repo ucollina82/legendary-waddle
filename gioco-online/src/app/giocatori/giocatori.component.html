@@ -1,0 +1,8 @@
+<dx-data-grid *ngIf="userList" [dataSource]="userList" keyExpr="id" [columnAutoWidth]="true" >
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+    <dxi-column caption="Giocatore"  dataField="fullName" ></dxi-column>
+    <dxi-column caption="Punteggio" dataField="points"></dxi-column>
+    <dxi-column caption="Partite" dataField="userMatches"></dxi-column>
+    <dxi-column caption="Data d'iscrizione" [calculateCellValue]="playerDate" ></dxi-column>
+</dx-data-grid>
