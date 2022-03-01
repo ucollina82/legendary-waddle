@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       this.addNewUser(userList);
     }
 
-    this.storage.session.set<Users>("CurrentUser", new Users(this.modelusername, this.modelpassword));
+    this.storage.session.set<Users>("CurrentUser", new Users(0,this.modelusername, this.modelpassword));
     this.router.navigate(['/giochi']);
 
   }
@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
   }
 
   private addNewUser(userList: Users[]) {
-    let newUserList = userList.concat([new Users(this.modelusername, this.modelpassword)]);
+    let userId = Math.max(0,Math.max(...userList.map(user => user.id)))
+    let newUserList = userList.concat([new Users(userId + 1,this.modelusername, this.modelpassword)]);
     this.storage.local.set<Users[]>("Users", newUserList);
   }
 

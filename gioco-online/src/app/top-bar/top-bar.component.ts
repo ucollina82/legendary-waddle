@@ -23,6 +23,10 @@ export class TopBarComponent implements OnInit {
     this.router.navigate(['/partite']);
   }
 
+  goToGiocatori() {
+    this.router.navigate(['/giocatori']);
+  }
+
   goToGiochi() {
     this.router.navigate(['/giochi']);
   }
