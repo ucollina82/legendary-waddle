@@ -44,9 +44,7 @@ export class Matches {
       return this._player;
     }
 
-    /* get winnerDescription():string {
-        return this.winner.name + ' ' + this.winner.surname; 
-    } */
+    
 
     public set player(user: Users){
       this._player = user;
@@ -55,11 +53,10 @@ export class Matches {
     }
 
     addMove(move: Move) {
-        // aggiunge mossa al match
-        if (this.moves.length < 4) { //entra qui quando sta per effettuare la 5 mossa
+        if (this.moves.length < 4) { 
             this.moves.push(move);
             this.currentPlayer = this.currentPlayer.name == this.maker.name && this.currentPlayer.surname == this.maker.surname ? this._player : this.maker //TO ASK: Perchè se confronto gli oggetti non funziona?
-        } else if (this.moves.length == 4) { //
+        } else if (this.moves.length == 4) { 
             this.moves.push(move);
             this.winner = this.currentPlayer.name == this.maker.name && this.currentPlayer.surname == this.maker.surname ? this._player : this.maker
             this.winner.points = this.winner.points + 4;

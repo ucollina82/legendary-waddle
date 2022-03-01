@@ -26,6 +26,12 @@ export class PartiteComponent implements OnInit {
     return statusPipe.transform(rowData.status)
   }
 
+  winnerDescription(rowData: Matches) {
+    if (rowData.winner != undefined)
+    { return rowData.winner.name + ' ' + rowData.winner.surname }
+    return ""
+  }
+
   moveNumber(rowData: Matches){
     return rowData.moves.length;
   }

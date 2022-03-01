@@ -62,12 +62,13 @@ export class PartitaComponent implements OnInit {
  /*    this.playgroundMove = document.querySelector('.pg1');
     this.playgroundMove.className += ' selected';
     this.setPlayground(); */
-    this.moveList = this.match.moves;
     this.update();
   }
 
   update(){
+   
     this.match = this.getMatch();
+    this.moveList = this.match.moves;
     this.enableMove = this.match.currentPlayer.name == this.currentUser.name && this.match.currentPlayer.surname == this.currentUser.surname ? true : false
     this.getPlayground();
   }

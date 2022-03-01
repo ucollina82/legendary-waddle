@@ -4,8 +4,12 @@
 <div class="row">
   <div class="col">
     <b >Stato della partita:</b><br>
-    <div *ngIf="!enableMove" style="color:red;">In attesa dell'avversario</div> 
-    <div *ngIf="enableMove" style="color:green;">È il tuo turno!</div> 
+    <div *ngIf="!enableMove && match.status == matchStatus.onGoing" style="color:red;">In attesa dell'avversario</div> 
+    <div *ngIf="enableMove && match.status == matchStatus.onGoing" style="color:green;">È il tuo turno!</div> 
+    <div *ngIf="match.status == matchStatus.end" style="color:red;">Terminata</div> 
+    <br>
+    <b *ngIf="match.status == matchStatus.end">Vincitore:</b><br>
+    <div *ngIf="match.status == matchStatus.end" style="color:green;">{{match.winner.name + ' ' + match.winner.surname}}</div> 
     <br>
     <b>Giocatori:</b><br>
     <div>{{match.maker.name}} {{match.maker.surname}} VS {{match.player.name}} {{match.player.surname}}</div> 

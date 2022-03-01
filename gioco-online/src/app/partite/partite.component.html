@@ -5,16 +5,10 @@
     <dxi-column caption="Giocatore 1" dataField="makerDescription"></dxi-column>
     <dxi-column caption="Giocatore 2" dataField="playerDescription"></dxi-column>
     <dxi-column caption="Stato" [calculateCellValue]="statusCell"></dxi-column>
-    <dxi-column caption="Vincitore" dataField="winnerDescription"></dxi-column>
+    <dxi-column caption="Vincitore" [calculateCellValue]="winnerDescription"></dxi-column>
     <dxi-column caption="Mosse" [calculateCellValue]="moveNumber"></dxi-column>
     <dxi-column type="buttons">
         <dxi-button [onClick]="goToMatch" text="Visualizza"></dxi-button>
     </dxi-column> 
-    <!-- <dxi-column caption="Azioni">
-        <a [routerLink]="['/partita']" >
-            Visualizza
-        </a>
-    </dxi-column> -->
-   
 </dx-data-grid>
 
